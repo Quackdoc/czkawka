@@ -22,7 +22,7 @@ const MAXIMUM_IMAGE_FILE_SIZE: u64 = 500 * 1024 * 1024;
 pub fn register_image_decoding_hooks() {
     imgalifier_heif::register_decoding_hooks();
     imgalifier_avif::register_decoding_hooks();
-    jxl_oxide::integration::register_image_decoding_hook();
+    jxl_image_rs_integration::register_image_decoding_hook();
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -134,7 +134,7 @@ pub fn get_dynamic_image_from_path(path: &str, opts: Option<ImgResizeOptions>) -
             Err(e) => Err(flc!("core_image_open_failed", path = path, reason = e)),
         }
     } else {
-        let message = create_crash_message("Image-rs or rawler or jxl-oxide", path, "https://github.com/image-rs/image/issues");
+        let message = create_crash_message("Image-rs or rawler or jxl-rs", path, "https://github.com/image-rs/image/issues");
         error!("{message}");
         Err(message)
     }
